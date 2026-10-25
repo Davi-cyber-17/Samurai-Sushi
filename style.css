@@ -1,0 +1,109 @@
+:root{
+  --bg:#04060f;--panel:rgba(10,16,34,.72);--line:rgba(0,229,255,.45);
+  --c1:#00e5ff;--c2:#ff2d95;--c3:#39ff88;--c4:#ffd23f;--txt:#d8e6ff;--mute:#8a9bc2;
+  --font:"Orbitron","Rajdhani","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+input{user-select:text;-webkit-user-select:text}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--font);touch-action:none;overscroll-behavior:none}
+body{height:100dvh;
+  background:
+    radial-gradient(ellipse at 50% 40%,rgba(0,229,255,.10),transparent 60%),
+    radial-gradient(ellipse at 80% 90%,rgba(255,45,149,.10),transparent 55%),
+    linear-gradient(rgba(0,229,255,.06) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(90deg,rgba(0,229,255,.06) 1px,transparent 1px) 0 0/56px 56px,
+    var(--bg);
+  animation:grid 14s linear infinite}
+@keyframes grid{to{background-position:0 0,0 0,0 56px,56px 0,0 0}}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(transparent 0 3px,rgba(0,0,0,.14) 3px 4px)}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+
+.screen{position:fixed;inset:0;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;
+  padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));z-index:30}
+.screen.on{display:flex}
+.screen.over{background:rgba(3,5,12,.78);backdrop-filter:blur(6px);z-index:40}
+.panel{margin:auto;width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
+  padding:clamp(18px,4vw,30px);background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 0 40px rgba(0,229,255,.12),inset 0 0 30px rgba(0,229,255,.05);backdrop-filter:blur(10px)}
+h1{margin:0;font-size:clamp(30px,8vw,52px);line-height:1.02;font-weight:900;letter-spacing:.04em;
+  background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(0,229,255,.55))}
+h2{margin:0;font-size:clamp(18px,4.5vw,24px);letter-spacing:.12em;text-transform:uppercase;color:var(--c1);text-shadow:0 0 12px var(--c1)}
+.tag{font-size:11px;letter-spacing:.35em;color:var(--c2);text-shadow:0 0 8px var(--c2)}
+p{margin:0;font:500 14px/1.5 "Rajdhani","Segoe UI",system-ui,sans-serif;color:var(--mute);max-width:360px}
+p b{color:var(--c3)}
+.msg{min-height:20px;color:var(--c4)}
+
+button{font:700 15px var(--font);letter-spacing:.14em;text-transform:uppercase;width:100%;padding:15px 18px;cursor:pointer;
+  color:var(--c1);background:rgba(0,229,255,.07);border:1.5px solid var(--c1);border-radius:8px;
+  box-shadow:0 0 14px rgba(0,229,255,.35),inset 0 0 14px rgba(0,229,255,.12);transition:.15s}
+button:hover{background:rgba(0,229,255,.18);box-shadow:0 0 26px rgba(0,229,255,.7),inset 0 0 18px rgba(0,229,255,.25)}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.r{color:var(--c2);border-color:var(--c2);background:rgba(255,45,149,.07);box-shadow:0 0 14px rgba(255,45,149,.35),inset 0 0 14px rgba(255,45,149,.12)}
+button.r:hover{background:rgba(255,45,149,.18);box-shadow:0 0 26px rgba(255,45,149,.7)}
+button.g{color:var(--c3);border-color:var(--c3);background:rgba(57,255,136,.07);box-shadow:0 0 14px rgba(57,255,136,.35),inset 0 0 14px rgba(57,255,136,.12)}
+button.g:hover{background:rgba(57,255,136,.18);box-shadow:0 0 26px rgba(57,255,136,.7)}
+button.w{color:var(--mute);border-color:rgba(138,155,194,.5);background:transparent;box-shadow:none}
+button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%}
+.row button{padding:16px 0;font-size:20px;letter-spacing:0}
+.lvpick{width:100%;display:flex;flex-direction:column;gap:8px;align-items:center}
+.row5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:100%}
+.row5 button{padding:12px 0;font-size:18px;letter-spacing:0}
+.row5 button.sel{background:rgba(0,229,255,.32);box-shadow:0 0 22px rgba(0,229,255,.8),inset 0 0 14px rgba(0,229,255,.35);color:#fff}
+.lvname{min-height:20px;color:var(--c4)}
+.sep{width:100%;display:flex;align-items:center;gap:10px;color:var(--mute);font-size:11px;letter-spacing:.3em}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--line)}
+input{font:900 28px var(--font);width:100%;padding:12px;text-align:center;text-transform:uppercase;letter-spacing:.4em;
+  color:#fff;background:rgba(0,0,0,.45);border:1.5px solid var(--line);border-radius:8px}
+input::placeholder{color:#3b4a6e;letter-spacing:.2em;font-size:18px}
+.code{font:900 clamp(40px,12vw,60px) var(--font);letter-spacing:.2em;padding:6px 6px 6px 20px;color:#fff;
+  border:1.5px dashed var(--c1);border-radius:10px;text-shadow:0 0 18px var(--c1);background:rgba(0,229,255,.06)}
+.dots{display:flex;gap:12px}
+.dot{width:44px;height:44px;border-radius:50%;border:2px solid #25304f;background:#0a1020;transition:.2s}
+.dot.on{box-shadow:0 0 18px currentColor;border-color:currentColor;background:currentColor}
+.dot.me{outline:2px solid #fff;outline-offset:3px}
+.stack{display:flex;flex-direction:column;gap:10px;width:100%}
+
+/* ---- HUD ---- */
+#exitBtn,#hud{position:fixed;z-index:15;display:none;top:max(8px,env(safe-area-inset-top))}
+#exitBtn.on{display:block;right:max(10px,env(safe-area-inset-right));width:auto;padding:8px 12px;font-size:11px}
+#hud.on{display:block;left:max(12px,env(safe-area-inset-left));font:700 11px var(--font);letter-spacing:.22em;color:var(--mute);line-height:30px;white-space:nowrap}
+#hud b{color:var(--c1);text-shadow:0 0 8px var(--c1)}
+
+/* ---- Controles: botão de toque (um por jogador) ---- */
+#rails{position:fixed;inset:0;z-index:12;display:none;pointer-events:none;--T:64px}
+#rails.on{display:block}
+.rail{position:absolute;pointer-events:auto;touch-action:none;cursor:pointer}
+.rin{position:absolute;left:50%;top:50%;display:flex;align-items:stretch;gap:calc(var(--T)*.14)}
+.rbadge{flex:0 0 auto;min-width:calc(var(--T)*1.7);padding:0 calc(var(--T)*.14);display:flex;align-items:center;justify-content:center;gap:calc(var(--T)*.12);
+  border:2px solid var(--pc);border-radius:calc(var(--T)*.26);background:rgba(6,10,24,.88);color:var(--pc);
+  box-shadow:0 0 14px var(--pc),inset 0 0 12px rgba(255,255,255,.04);white-space:nowrap}
+.rn{font-family:var(--font);font-weight:700;font-size:calc(var(--T)*.2);letter-spacing:.1em;opacity:.9}
+.rs{font-family:var(--font);font-weight:900;font-size:calc(var(--T)*.34);text-shadow:0 0 10px var(--pc)}
+.rw{font-style:normal;font-size:calc(var(--T)*.2);color:var(--c4);letter-spacing:0}
+.cmp .rn,.cmp .rw{display:none}
+.cmp .rbadge{min-width:calc(var(--T)*1.05);padding:0 calc(var(--T)*.1)}
+.rtrack{position:relative;flex:1;min-width:0;border:2px solid var(--pc);border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 55%),rgba(6,10,24,.78);
+  box-shadow:0 0 14px var(--pc),inset 0 0 22px rgba(0,0,0,.55);overflow:hidden;
+  animation:tap 1.6s ease-in-out infinite;transition:transform .06s,background .06s}
+@keyframes tap{50%{box-shadow:0 0 24px var(--pc),inset 0 0 22px rgba(0,0,0,.55)}}
+.rhint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;text-align:center;
+  font-family:var(--font);font-weight:900;font-size:calc(var(--T)*.24);letter-spacing:.18em;color:var(--pc);text-shadow:0 0 10px var(--pc);padding:0 calc(var(--T)*.3);white-space:nowrap}
+.cmp .rhint{font-size:calc(var(--T)*.22);letter-spacing:.1em}
+.rail.press .rtrack{transform:scale(.97);background:var(--pc);animation:none;box-shadow:0 0 30px var(--pc),inset 0 0 18px rgba(255,255,255,.35)}
+.rail.press .rhint{color:#04060f;text-shadow:none}
+.rail.stun .rtrack{border-color:#ff3b3b;box-shadow:0 0 14px #ff3b3b;opacity:.6;animation:none}
+.rail.stun .rhint{color:#ff6b6b;text-shadow:none}
+.rail.stun.press .rtrack{background:rgba(6,10,24,.78);transform:none}
+
+@media (min-width:900px){.panel{max-width:480px}p{font-size:16px}}
+@media (max-height:620px){
+  .panel{gap:8px;padding:12px}h1{font-size:28px}.code{font-size:32px}button{padding:10px 14px}.dot{width:32px;height:32px}
+  .row button{padding:10px 0}.row5 button{padding:8px 0}
+}
+@media (max-width:420px){#hud.on{letter-spacing:.1em;font-size:10px}}
+@media (prefers-reduced-motion:reduce){body{animation:none}}

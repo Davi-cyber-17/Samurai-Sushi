@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#04060f">
+<title>Samurai Sushi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="rails"></div>
+<div id="hud"></div>
+<button id="exitBtn" class="w" onclick="toMenu()">Sair ✕</button>
+
+<main class="screen on" id="menu">
+  <div class="panel">
+    <span class="tag">// REFLEX PROTOCOL</span>
+    <h1>Samurai<br>Sushi</h1>
+    <p>A mesa gira e seus hashis ficam parados. <b>Toque</b> na hora certa, quando o sushi ou sashimi passar pela sua zona colorida. Errou? Seus hashis travam. Fuja do wasabi! São 5 fases seguidas, cada uma mais difícil: os pontos se somam e vence quem tiver mais no final.</p>
+    <div class="lvpick">
+      <span class="sep">FASE INICIAL</span>
+      <div class="row5" id="lvRow"></div>
+      <p class="lvname" id="lvName"></p>
+    </div>
+    <div class="stack">
+      <button onclick="show('online')">Modo Online</button>
+      <button class="r" onclick="show('local')">Modo Local</button>
+    </div>
+    <p>Online funciona entre celular, tablet e computador.</p>
+  </div>
+</main>
+
+<main class="screen" id="local">
+  <div class="panel">
+    <h2>Jogadores</h2>
+    <p>1 jogador enfrenta um robô. De 2 a 4, cada um usa o seu botão na borda da tela.<br>Teclado: P1 S, P2 K, P3 ↓, P4 5 (numérico). Com 1 jogador: Espaço.</p>
+    <div class="row">
+      <button onclick="startLocal(1)">1</button><button class="r" onclick="startLocal(2)">2</button>
+      <button class="g" onclick="startLocal(3)">3</button><button onclick="startLocal(4)" style="color:var(--c4);border-color:var(--c4)">4</button>
+    </div>
+    <button class="w" onclick="show('menu')">Voltar</button>
+  </div>
+</main>
+
+<main class="screen" id="online">
+  <div class="panel">
+    <h2>Modo Online</h2>
+    <button onclick="hostRoom()">Criar sala</button>
+    <div class="sep">OU</div>
+    <input id="codeIn" maxlength="4" placeholder="CÓDIGO" autocomplete="off" autocapitalize="characters" spellcheck="false">
+    <button class="r" onclick="joinRoom()">Entrar na sala</button>
+    <p class="msg" id="onMsg"></p>
+    <button class="w" onclick="toMenu()">Voltar</button>
+  </div>
+</main>
+
+<main class="screen" id="lobby">
+  <div class="panel">
+    <h2>Sala</h2>
+    <div class="code" id="roomCode">----</div>
+    <button class="w" id="copyBtn" onclick="copyLink()">Copiar link de convite</button>
+    <div class="dots" id="dots"></div>
+    <p id="lobMsg"></p>
+    <div class="stack">
+      <button class="g" id="startBtn" onclick="hostStart()">Começar</button>
+      <button class="w" onclick="toMenu()">Sair</button>
+    </div>
+  </div>
+</main>
+
+<main class="screen over" id="end">
+  <div class="panel">
+    <span class="tag">// FIM DE JOGO</span>
+    <h2 id="endTxt"></h2>
+    <p id="endSub"></p>
+    <div class="stack">
+      <button class="g" id="nextBtn" onclick="advance()">Próxima fase</button>
+      <button class="g" id="again" onclick="restartCampaign()">Jogar de novo</button>
+      <button class="w" onclick="toMenu()">Menu</button>
+    </div>
+    <p id="endWait"></p>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
